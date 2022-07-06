@@ -3,7 +3,7 @@
  * @Description:
  * @CreateDate:
  * @LastEditor:
- * @LastEditTime: 2022-07-05 17:20:52
+ * @LastEditTime: 2022-07-06 17:42:42
  */
 import { Inject, Controller, Get, Query } from '@midwayjs/decorator';
 import { Context } from '@midwayjs/koa';
@@ -49,6 +49,20 @@ export class APIController {
       message: '登录成功',
       data: this.ctx.get('authorization'),
       user,
+    };
+  }
+  @Get('/login')
+  async login(
+    @Query('username') username: string,
+    @Query('password') password: string
+  ) {
+    return {
+      code: 200,
+      result: 'success',
+      message: '登录成功',
+      data: this.ctx.get('authorization'),
+      username,
+      password,
     };
   }
 }

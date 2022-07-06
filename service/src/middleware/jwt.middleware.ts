@@ -3,7 +3,7 @@
  * @Description:
  * @CreateDate:
  * @LastEditor:
- * @LastEditTime: 2022-07-05 17:16:24
+ * @LastEditTime: 2022-07-06 17:40:15
  */
 // src/middleware/jwt.middleware
 
@@ -24,12 +24,13 @@ export class JwtMiddleware {
   resolve() {
     return async (ctx: Context, next: NextFunction) => {
       // 判断下有没有校验信息
+
       if (!ctx.headers['authorization']) {
         return {
           code: 401,
           result: 'error',
           message: 'token无效',
-          data: null,
+          data: /login?/.test(ctx.request.URL.pathname),
         };
       }
       // 从 header 上获取校验信息
