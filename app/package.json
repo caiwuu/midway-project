@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -11,11 +11,13 @@
     "ant-design-vue": "^3.2.9",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
+    "js-md5": "^0.7.3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/js-md5": "^0.4.3",
     "@types/node": "^18.0.2",
     "@types/webpack-env": "^1.17.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",

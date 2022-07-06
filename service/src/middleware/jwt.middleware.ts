@@ -23,24 +23,32 @@ export class JwtMiddleware {
 
   resolve() {
     return async (ctx: Context, next: NextFunction) => {
-      // 判断下有没有校验信息
+      // 登录不经过jwt验证
+      console.log(ctx.request.url);
+      if (ctx.request.url === '/login') {
+        await next();
+        return;
+      }
+      console.log(ctx.headers['token']);
 
-      if (!ctx.headers['authorization']) {
+      // jwt验证
+      if (!ctx.headers['token']) {
+        ctx.response.status = 401;
         return {
           code: 401,
           result: 'error',
-          message: 'token无效',
-          data: /login?/.test(ctx.request.URL.pathname),
+          message: '无效token',
+          data: null,
         };
       }
       // 从 header 上获取校验信息
-      const parts = ctx.get('authorization').trim().split(' ');
-
+      const parts = ctx.get('token').trim().split(' ');
       if (parts.length !== 2) {
+        ctx.response.status = 401;
         return {
           code: 401,
           result: 'error',
-          message: 'token无效',
+          message: '无效token',
           data: null,
         };
       }
@@ -48,30 +56,20 @@ export class JwtMiddleware {
 
       if (/^Bearer$/i.test(scheme)) {
         try {
-          //jwt.verify方法验证token是否有效
           await this.jwtService.verify(token, {
             complete: true,
           });
           await next();
+          //TODO  jwt 过期校验
         } catch (error) {
           return {
             code: 401,
             result: 'error',
-            message: 'token无效',
+            message: '无效token',
             data: null,
           };
-          //token过期 生成新的token
-          // const newToken = getToken(user);
-          //将新token放入Authorization中返回给前端
-          // ctx.set('Authorization', newToken);
         }
       }
     };
-  }
-
-  // 配置忽略鉴权的路由地址
-  public match(ctx: Context): boolean {
-    const ignore = ctx.path.indexOf('/api/admin/login') !== -1;
-    return !ignore;
   }
 }

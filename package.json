@@ -1,0 +1,25 @@
+{
+  "name": "midway-project",
+  "version": "1.0.0",
+  "description": "midway-project",
+  "main": "index.js",
+  "scripts": {
+    "serve": "cd service &&  npm run dev",
+    "app": "cd app && npm run dev",
+    "test": "cd service && npm run test",
+    "all": "concurrently \"npm run app\" \"npm run serve\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caiwuu/midway-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caiwuu/midway-project/issues"
+  },
+  "homepage": "https://github.com/caiwuu/midway-project#readme",
+  "devDependencies": {
+    "concurrently": "^7.2.2"
+  }
+}

@@ -8,14 +8,11 @@
 import { Inject, Provide } from '@midwayjs/decorator';
 import { IUserOptions } from '../interface';
 import { UserModel } from '../model/user.model';
-import { UserDTO } from '../dto/user.dto';
-import { Validate } from '@midwayjs/validate';
 @Provide()
 export class UserService {
   @Inject()
   userModel: UserModel;
-  @Validate()
-  async getUser(options: UserDTO) {
+  async getUser(options) {
     const user = await this.userModel.getUserByUsernameAndPassword(options);
     return user;
   }
