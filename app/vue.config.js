@@ -3,14 +3,14 @@
  * @Description:
  * @CreateDate:
  * @LastEditor:
- * @LastEditTime: 2022-07-06 14:57:29
+ * @LastEditTime: 2022-07-07 15:13:12
  */
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     open: false,
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 8081,
     https: false,
     proxy: {
